@@ -11,7 +11,5 @@ find_package(SFML
   COMPONENTS 
     system window graphics network audio REQUIRED)
 
-add_executable(INTRO intro.cpp)
 add_executable(ORBIT orbits.cpp)
-target_link_libraries(INTRO sfml-graphics sfml-window sfml-system)
 target_link_libraries(ORBIT sfml-graphics sfml-window sfml-system)
