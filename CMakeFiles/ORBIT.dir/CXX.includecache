@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aswin/Desktop/cpp dev/sfml_dev/orbits.cpp
+SFML/Graphics.hpp
+-
+chrono
+-
+math.h
+-
+thread
+-
+iostream
+-
+vector
+-
+
