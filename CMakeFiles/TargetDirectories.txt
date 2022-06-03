@@ -1,4 +1,3 @@
 /home/aswin/Desktop/cpp dev/sfml_dev/CMakeFiles/rebuild_cache.dir
 /home/aswin/Desktop/cpp dev/sfml_dev/CMakeFiles/edit_cache.dir
 /home/aswin/Desktop/cpp dev/sfml_dev/CMakeFiles/ORBIT.dir
-/home/aswin/Desktop/cpp dev/sfml_dev/CMakeFiles/INTRO.dir

@@ -4,8 +4,12 @@
 #include <thread>
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <queue>
 
 float delta_T = 0.01;
+float max_body_size = 50.0f;
+float min_body_size = 2.0f;
 
 class Acceleration
 {
@@ -20,6 +24,32 @@ class Acceleration
         accel_y = acel_y;
     }
 };
+
+template <class T>
+class Queue
+{
+    public:
+
+    int capacity;
+    std::vector <T> q;
+
+    Queue(int cap = 10000)
+    {
+        capacity = cap;
+    }
+
+    void add(T ele)
+    {
+        if(q.size() == capacity)
+        {
+            q.erase(q.begin());
+            
+        }
+        q.push_back(ele);
+    }
+
+};
+
 
 class Velocity
 {
@@ -72,14 +102,14 @@ class CelestialBodies
     position pos;
     velocity vel;
     sf::CircleShape body;
-    position trace[20];
+    Queue <position> trace;
 
     CelestialBodies(float m, position p, velocity v, sf::Color color)
     {
         pos = p;
         vel = v;
         mass = m;
-        body.setRadius(5.f);
+        body.setRadius(std::min(max_body_size, std::max(min_body_size, std::log(mass))));
         body.setPosition(pos.position_x, pos.position_y);
         body.setFillColor(color);
     }
@@ -96,6 +126,7 @@ class CelestialBodies
     {
         pos.position_x += vel.velocity_x * delta_T;
         pos.position_y += vel.velocity_y * delta_T;
+        trace.add(pos);
         std::cout<<"\nx: "<<pos.position_x<<"  y: "<<pos.position_y;
         body.setPosition(pos.position_x, pos.position_y);
     }
@@ -162,6 +193,12 @@ void render(std::vector<CelestialBodies> bodies)
         {   std::cout<<"\nBody "<<i;
             acceleration acc;
             window.draw(bodies[i].body);
+            sf::CircleShape trace_pt(1.f);
+            for(int t=0; t<bodies[i].trace.q.size(); t++)
+            {
+                trace_pt.setPosition(bodies[i].trace.q[t].position_x, bodies[i].trace.q[t].position_y);
+                window.draw(trace_pt);
+            }
             for(int j=0; j<bodies.size(); j++)
             {   
                 if(j != i)
@@ -182,7 +219,7 @@ void render(std::vector<CelestialBodies> bodies)
             bodies[i] = step(bodies[i], acc);
         }
 
-        sleep_until(system_clock::now() + 0.008s);
+        sleep_until(system_clock::now() + 0.001s);
         
         window.display();
     }
@@ -196,24 +233,24 @@ int main()
     position p(-120, 0);
     velocity v(5, 0);
     sf::Color c(200, 100, 0);
-    CelestialBodies sun(1000000, p, v, c);
+    CelestialBodies sun(100000, p, v, c);
     position p2(0, 200);
     sf::Color c2(0, 50, 220);
     velocity v2(-10, 65);
-    position p3(0, 150);
+    position p3(0, 250);
     sf::Color c3(50, 100, 220);
-    velocity v3(55, -40);
+    velocity v3(25, -20);
 
-    position p4(0, -100);
-    sf::Color c4(200, 20, 20);
-    velocity v4(85, -40);
+    position p4(0, 220);
+    sf::Color c4(220, 20, 20);
+    velocity v4(35, -1);
 
     CelestialBodies planet(10, p2, v2, c2);
-    CelestialBodies planet2(100, p3, v3, c3);
+    CelestialBodies planet2(1500, p3, v3, c3);
     Bodies.push_back(sun);
     Bodies.push_back(planet);
     Bodies.push_back(planet2);
-    CelestialBodies planet3(10000, p4, v4, c4);
+    CelestialBodies planet3(2, p4, v4, c4);
     Bodies.push_back(planet3);
 
 

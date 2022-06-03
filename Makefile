@@ -123,46 +123,6 @@ ORBIT/fast:
 	$(MAKE) -f CMakeFiles/ORBIT.dir/build.make CMakeFiles/ORBIT.dir/build
 .PHONY : ORBIT/fast
 
-#=============================================================================
-# Target rules for targets named INTRO
-
-# Build rule for target.
-INTRO: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 INTRO
-.PHONY : INTRO
-
-# fast build rule for target.
-INTRO/fast:
-	$(MAKE) -f CMakeFiles/INTRO.dir/build.make CMakeFiles/INTRO.dir/build
-.PHONY : INTRO/fast
-
-intro.o: intro.cpp.o
-
-.PHONY : intro.o
-
-# target to build an object file
-intro.cpp.o:
-	$(MAKE) -f CMakeFiles/INTRO.dir/build.make CMakeFiles/INTRO.dir/intro.cpp.o
-.PHONY : intro.cpp.o
-
-intro.i: intro.cpp.i
-
-.PHONY : intro.i
-
-# target to preprocess a source file
-intro.cpp.i:
-	$(MAKE) -f CMakeFiles/INTRO.dir/build.make CMakeFiles/INTRO.dir/intro.cpp.i
-.PHONY : intro.cpp.i
-
-intro.s: intro.cpp.s
-
-.PHONY : intro.s
-
-# target to generate assembly for a file
-intro.cpp.s:
-	$(MAKE) -f CMakeFiles/INTRO.dir/build.make CMakeFiles/INTRO.dir/intro.cpp.s
-.PHONY : intro.cpp.s
-
 orbits.o: orbits.cpp.o
 
 .PHONY : orbits.o
@@ -199,10 +159,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ORBIT"
-	@echo "... INTRO"
-	@echo "... intro.o"
-	@echo "... intro.i"
-	@echo "... intro.s"
 	@echo "... orbits.o"
 	@echo "... orbits.i"
 	@echo "... orbits.s"
